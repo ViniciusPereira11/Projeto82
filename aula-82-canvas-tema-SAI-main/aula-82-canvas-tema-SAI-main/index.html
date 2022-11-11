@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>meu primeiro canvas</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+   
+
+</head>
+<body> 
+    <script src="sketch.js"></script>
+    <center>
+    <h1> Meu primeiro Canvas </h1>
+    <canvas id="canvas" width="650px" height="600px"></canvas>
+    <br>
+    <input id="cor" type="text" placeholder="Digite a cor 🎨">  
+    <input id="larguraLinha" type="number" placeholder="Digite a largura 🖌️🎨">
+    <button id="botaoLimpar" onclick="limpar()"> Limpar 🧹 </button>
+    <button id="botaoDesenhar" onclick="desenharCirculo()"> Desenhar 🖌️ </button>
+    <img src="sai.png">
+</center>
+
+    <script>
+
+        canvas = document.getElementById("canvas");
+        ctx = canvas.getContext("2d");
+
+cor =
+         "black";
+        larguraLinha = 1;
+        //é aqui que cria a variável eventoMouse
+        var eventoMouse = "";
+        //é aqui que cria a variável ultimoX, ultimoY
+        var ultimoX ;
+        var ultimoY ;
+        //é aqui que define o que ocorre no clique no canvas   
+        canvas.addEventListener("mousedown",mouseClicou);
+        function mouseClicou (e){
+        cor  = document.getElementById("cor").value;
+        larguraLinha = document.getElementById("larguraLinha").value;
+        eventomouse = "mousedown" ;
+
+        }
+        //é aqui que define o que ocorre quando o mouse mexe
+        canvas.addEventListener ("mousemove", mousemoveu);
+        function mousemoveu (e){
+        atualX = e.x - canvas.offsetLeft;
+        atualY = e.y - canvas.offsetTop;
+        if (eventomouse == "mousedown") {
+        ctx.beginPath();
+        ctx.strokeStyle = cor;
+        ctx.lineWidth = larguraLinha;
+        ctx.arc(atualX, atualY,40,0,Math.PI*2)
+
+        
+        ctx.stroke();
+        }
+        ultimoX = atualX;
+        ultimoY = atualY;
+
+        }
+        //é aqui que define o que ocorre quando o mouse sobe
+        canvas.addEventListener ("mouseup", mousesubiu );
+        function mousesubiu (e){
+        eventomouse = "mouseUp";
+
+
+
+        }
+        //é aqui que define o que ocorre quando o mouse sai
+        canvas.addEventListener("mouseleave", mouseSaiu );
+        function mouseSaiu (e){
+        eventomouse = "mouseleave";
+
+        }
+
+
+
+        function desenharCirculo(){
+            cor = document.getElementById("cor").value;
+            ctx.beginPath();
+            ctx.strokeStyle = cor;
+            ctx.lineWidth = 2;
+            ctx.arc(325,300,40,0,2*Math.PI);
+            ctx.stroke();
+        }
+        function limpar(){
+            ctx.clearRect(0,0,canvas.width, canvas.height)
+        }
+
+    </script>
+</body>
+</html>
